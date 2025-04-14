@@ -1,0 +1,17 @@
+@use "variables";
+
+/* Background usando clases */
+@each $name, $value in variables.$colors {
+    .bg-#{$name} {
+      background-color: var(--color-#{$name});
+    }
+  }
+  
+  /* Text utility classes */
+  @each $name, $value in variables.$colors {
+    .text-#{$name} {
+      color: var(--color-#{$name});
+    }
+  }
+  
+  

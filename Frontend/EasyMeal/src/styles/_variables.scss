@@ -1,0 +1,13 @@
+$colors: (
+  "burnt-orange": #cd5c08,
+  "peach": #fff5e4,
+  "mint": #c1d8c3,
+  "sage": #6a9c8f,
+);
+
+// Generar las variables CSS dentro de :root
+:root {
+  @each $name, $value in $colors {
+    --color-#{$name}: #{$value};
+  }
+}

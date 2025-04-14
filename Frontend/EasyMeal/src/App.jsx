@@ -1,9 +1,13 @@
 function App() {
   return (
-    <>
-      <p>prueba</p>
-      <h1 class="text-5xl font-bold underline">Hello world!</h1>
-    </>
+    <div className="min-h-screen bg-peach flex flex-col items-center justify-center p-6">
+      <h1 className="text-4xl font-bold text-burnt-orange mb-4">
+        🥗 EasyMeal Planner
+      </h1>
+      <p className="text-sage text-lg">
+        Planifica tus comidas de forma saludable y rápida.
+      </p>
+    </div>
   );
 }
 
