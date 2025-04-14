@@ -1,0 +1,57 @@
+.footer {
+    background-color: #f8e1e7;
+    padding: 20px;
+    text-align: center;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-text {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.icon {
+    font-size: 2rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.instagram {
+    color: #e4405f;
+}
+
+.tiktok {
+    color: #000;
+}
+
+.youtube {
+    color: #ff0000;
+}
+
+.facebook {
+    color: #1877f2;
+}
+
+.icon:hover {
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+
+.footer-credits {
+    font-size: 0.9rem;
+    color: #666;
+}

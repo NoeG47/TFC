@@ -1,0 +1,40 @@
+:root {
+  --color-burnt-orange: #cd5c08;
+  --color-peach: #fff5e4;
+  --color-mint: #c1d8c3;
+  --color-sage: #6a9c8f;
+}
+
+/* Background usando clases */
+.bg-burnt-orange {
+  background-color: var(--color-burnt-orange);
+}
+
+.bg-peach {
+  background-color: var(--color-peach);
+}
+
+.bg-mint {
+  background-color: var(--color-mint);
+}
+
+.bg-sage {
+  background-color: var(--color-sage);
+}
+
+/* Text utility classes */
+.text-burnt-orange {
+  color: var(--color-burnt-orange);
+}
+
+.text-peach {
+  color: var(--color-peach);
+}
+
+.text-mint {
+  color: var(--color-mint);
+}
+
+.text-sage {
+  color: var(--color-sage);
+}/*# sourceMappingURL=index.css.map */
