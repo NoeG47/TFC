@@ -1,0 +1,19 @@
+
+/* colores personalizados */
+
+$colors: (
+  "dark": #222831,
+  "dark-gray": #393e46,
+  "teal": #00adb5,
+  "light-gray": #eeeeee,
+  "light": #d9d9d9,
+  "white": #ffffff,
+);
+
+// Generar las variables CSS dentro de :root
+:root {
+  @each $name, $value in $colors {
+    --color-#{$name}: #{$value};
+  }
+}
+
