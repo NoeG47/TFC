@@ -1,18 +1,18 @@
 import React from "react";
-import "../estilos/Header.css"
+//import "../estilos/Header.css"
 
 const Header = () => {
 
     return (
-        <header className="header flex items-center justify-between p-4">
-      <div className="header-content">
+        <header className="w-full flex bg-peach items-center justify-between p-4">
+      <div>
         <img
           src="../images/logo.ico"
           alt="EasyMeal Logo"
-          className="logo w-12 h-auto" 
+          className="w-12 md:w-16 lg:w-20 h-auto" 
         />
       </div>
-      <div className="menu-icon text-3xl cursor-pointer">
+      <div className="text-2xl md:text-3xl lg:text-4xl cursor-pointer">
         ≡
       </div>
     </header>
