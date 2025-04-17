@@ -10,7 +10,7 @@ const Footer = () => {
                 className="w-12 md:w-16 lg:w-20 h-auto"
             />
             <div className="flex flex-col items-center">
-                <div className="font-bold mb-2 text-center text-xs md:text-sm lg:text-base">
+                <div className="font-semibold mb-2 text-center text-xs md:text-sm lg:text-base">
                     <p>Easymeal © Todos los derechos reservados</p>
                     <div className="flex justify-center gap-5 pt-4">
                         <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
