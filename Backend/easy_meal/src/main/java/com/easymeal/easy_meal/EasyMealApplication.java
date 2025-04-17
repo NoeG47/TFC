@@ -13,9 +13,11 @@ public class EasyMealApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EasyMealApplication.class, args);
 	}
-	@Bean
+	/*
+	 * @Bean
 	public CommandLineRunner demo(UsuarioRepositorio usuarioRepository,RecetaRepositorio recetaRepo) {
 		return args -> {
+
 			Usuario usuario = new Usuario();
 			usuario.setNombre("Lorena");
 			usuario.setCorreo("lorena.perez@example.com");
@@ -44,6 +46,9 @@ public class EasyMealApplication {
 
 			System.out.println("✅ Usuario creado exitosamente");
 		};
-	}
+}
+	 */
+	
+	
 
 }
