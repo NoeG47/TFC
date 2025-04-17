@@ -98,19 +98,10 @@ const Login = () => {
       className="input-field"
     />
   </div>
-  <div className="checkbox-group">
-    <input
-      type="checkbox"
-      name="sesion"
-      checked={form.sesion}
-      onChange={gestionarCambio}
-      className="checkbox"
-    />
-    <label htmlFor="sesion" className="label">Recordar Sesión</label>
-  </div>
   {error && <p className="error-message">{error}</p>}
   
-  <button type="submit" className="submit-button">Login</button>
+  <button type="submit" className="submit-button">Accer</button>
+  <button type="submit" className="submit-button">Registrar</button>
         </form>
       </div>
     </div>
