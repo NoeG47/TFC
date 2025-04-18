@@ -1,19 +1,27 @@
 import Inicio from "./Componentes/Inicio"
+import { Routes, Route } from "react-router-dom";
+import Login from "./login/Login";
+import Header from "./Componentes/Header";
+import Footer from "./Componentes/Footer";
+import Registrar from "./Componentes/Registrar";
+import Pagina404 from "./Componentes/Pagina404";
+
 function App() {
   return (
-    <div className="min-h-screen inset-x-0 top-0 bg-white flex flex-col items-center justify-between">
-      <Inicio></Inicio>
-     {/*
-       <h1 className="text-4xl font-bold text-burnt-orange mb-4">
-        🥗 EasyMeal Planner
-      </h1>
-      <p className="text-sage text-lg">
-        Planifica tus comidas de forma saludable y rápida.
-      </p>
-      */}
-      
-    </div>
-    
+    <>
+      <Header />{/*Elemento común para todos los componentes*/}
+      <div className="min-h-screen inset-x-0 top-0 bg-white flex flex-col items-center justify-between">
+        <Routes>
+        
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Inicio />} />
+          <Route path="/registrar" element={<Registrar />} />
+          <Route path="*" element={<Pagina404/>}/>
+        </Routes>
+
+        <Footer />{/*Elemento común para todos los componentes*/}
+      </div>
+    </>
   );
 }
 

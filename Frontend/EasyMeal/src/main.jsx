@@ -4,9 +4,13 @@ import "./index.css";
 //La línea de abajo solo se usa para colores
 import "../src/styles/index.scss";
 import App from "./App.jsx";
+import { BrowserRouter } from 'react-router-dom'
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </StrictMode>
 );

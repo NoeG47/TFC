@@ -3,7 +3,7 @@ import { FaInstagram, FaTiktok, FaYoutube, FaFacebook } from "react-icons/fa";
 const Footer = () => {
 
     return (
-        <footer className="w-full flex flex-col md:flex-row justify-between items-center bg-peach p-2">
+        <footer className="w-full flex flex-row flex-wrap justify-between items-center bg-peach p-2 gap-4">
             <img
                 src="../images/logo.ico"
                 alt="EasyMeal Logo"
@@ -29,8 +29,8 @@ const Footer = () => {
 
                 </div>
             </div>
-            <div className="hidden md:block w-20">
-                {/* div vacío para que quede alineado al centro y que se quite cuando se haga móvil */}
+            <div className="hidden sm:block w-20">
+                {/* div vacío para que quede alineado al centro y que se quite luego*/}
             </div>
 
         </footer>
