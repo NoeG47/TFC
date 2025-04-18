@@ -5,6 +5,7 @@ import Header from "./Componentes/Header";
 import Footer from "./Componentes/Footer";
 import Registrar from "./Componentes/Registrar";
 import Pagina404 from "./Componentes/Pagina404";
+import Ingredientes from "./Componentes/Ingredientes";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
           <Route path="/" element={<Inicio />} />
           <Route path="/registrar" element={<Registrar />} />
           <Route path="*" element={<Pagina404/>}/>
+          <Route path="/ingredientes" element={<Ingredientes />} />
+
         </Routes>
 
         <Footer />{/*Elemento común para todos los componentes*/}

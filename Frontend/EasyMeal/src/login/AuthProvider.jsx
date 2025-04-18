@@ -1,36 +1,35 @@
-import React, { createContext, useContext, useState } from 'react';
-//import UseStateStorage from '../servicioStorage/UseStateStorage';
+import React, { createContext, useContext, useState,useEffect } from 'react';
 
+// Crear el contexto
 const AuthContext = createContext();
 
+// Hook personalizado para usar el contexto
+export const useAuth = () => useContext(AuthContext);
+
+// Componente proveedor del contexto
 export const AuthProvider = ({ children }) => {
-  //const [user, setUser] = UseStateStorage("usuario",null);
+  const [usuario, setUsuario] = useState(null);
   
-  const [user, setUser] = useState(() => {
-    // Recuperar usuario desde localStorage si existe
-    return localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
-  });
+  useEffect(() => {
+    const usuarioGuardado = sessionStorage.getItem("usuario");
+    if (usuarioGuardado) {
+      setUsuario(JSON.parse(usuarioGuardado));
+    }
+  }, []);
 
-  // guardar en localStorage la ssion
-  const login = (userData) => {
-    setUser(userData);
-    //para convertirlo en cadena json JSON.stringify
-    localStorage.setItem('user', JSON.stringify(userData)); 
+  const login = (usuario) => {
+    setUsuario(usuario);
+    sessionStorage.setItem("usuario", JSON.stringify(usuario)); // 💾
   };
-  const loginNoLogeada = (userData) => setUser(userData);
 
-
-  // Eliminar del almacenamiento
   const logout = () => {
-    setUser(null);
-    localStorage.removeItem('user'); 
+    setUsuario(null);
+    sessionStorage.removeItem("usuario");
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout,loginNoLogeada }}>
+    <AuthContext.Provider value={{ usuario, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
-
-export const useAuth = () => useContext(AuthContext);
