@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <Header />{/*Elemento común para todos los componentes*/}
-      <div className="min-h-screen inset-x-0 top-0 bg-white flex flex-col items-center justify-between">
+      <div className="min-h-[80vh] inset-x-0 top-0 bg-white flex flex-col items-center justify-between">
         <Routes>
         
           <Route path="/login" element={<Login />} />

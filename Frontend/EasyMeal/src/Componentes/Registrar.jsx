@@ -76,51 +76,83 @@ const Registrar = () => {
   };
 
   return (
-    <div>
-      <h2>Crea tu cuenta en EasyMeal</h2>
-      <form onSubmit={enviarFormulario}>
-        <input
-          id="nombre"
-          type="text"
-          name="nombre"
-          value={form.nombre}
-          onChange={gestionarCambio}
-          placeholder="Nombre de usuario"
-        />
-        {errores.nombre && <p className="error-message">{errores.nombre}</p>}
-
-        <input
-          id="correo"
-          type="text"
-          name="correo"
-          value={form.correo}
-          onChange={gestionarCambio}
-          placeholder="Correo Electrónico"
-        />
-        {errores.correo && <p className="error-message">{errores.correo}</p>}
-
-        <input
-          id="contraseña"
-          type="password"
-          name="contraseña"
-          value={form.contraseña}
-          onChange={gestionarCambio}
-          placeholder="Contraseña"
-        />
-        {errores.contraseña && <p className="error-message">{errores.contraseña}</p>}
-
-        <input
-          id="imagen_perfil"
-          type="text"
-          name="imagen_perfil"
-          value={form.imagen_perfil}
-          onChange={gestionarCambio}
-          placeholder="URL de la imagen de perfil"
-        />
-        <button className="submit-button" type="submit">Crear Cuenta</button>
-      </form>
+    <div className="min-h-[80vh] flex items-center justify-center bg-white px-6 sm:px-12 md:px-20 py-8">
+      <div className="bg-white border border-black rounded-2xl py-10 px-6 sm:px-12 w-full max-w-2xl space-y-6">
+        <h2 className="text-2xl md:text-4xl font-semibold text-center">Crea tu cuenta en EasyMeal</h2>
+        <form onSubmit={enviarFormulario} className="space-y-5">
+          <div>
+            <input
+              id="nombre"
+              type="text"
+              name="nombre"
+              value={form.nombre}
+              onChange={gestionarCambio}
+              placeholder="Nombre de usuario"
+              className="w-full text-base md:text-xl border border-gray-300 rounded-xl px-2 sm:px-4 py-2 sm:py-3 placeholder:text-center"
+            />
+            {errores.nombre && (
+              <p className="text-base md:text-xl text-red-500 bg-red-100 px-3 py-2 rounded text-center">
+                {errores.nombre}
+              </p>
+            )}
+          </div>
+  
+          <div>
+            <input
+              id="correo"
+              type="text"
+              name="correo"
+              value={form.correo}
+              onChange={gestionarCambio}
+              placeholder="Correo Electrónico"
+              className="w-full text-base md:text-xl border border-gray-300 rounded-xl px-2 sm:px-4 py-2 sm:py-3 placeholder:text-center"
+            />
+            {errores.correo && (
+              <p className="text-base md:text-xl text-red-500 bg-red-100 px-3 py-2 rounded text-center">
+                {errores.correo}
+              </p>
+            )}
+          </div>
+  
+          <div>
+            <input
+              id="contraseña"
+              type="password"
+              name="contraseña"
+              value={form.contraseña}
+              onChange={gestionarCambio}
+              placeholder="Contraseña"
+              className="w-full text-base md:text-xl border border-gray-300 rounded-xl px-2 sm:px-4 py-2 sm:py-3 placeholder:text-center"
+            />
+            {errores.contraseña && (
+              <p className="text-base md:text-xl text-red-500 bg-red-100 px-3 py-2 rounded text-center">
+                {errores.contraseña}
+              </p>
+            )}
+          </div>
+  
+          <div>
+            <input
+              id="imagen_perfil"
+              type="text"
+              name="imagen_perfil"
+              value={form.imagen_perfil}
+              onChange={gestionarCambio}
+              placeholder="URL de la imagen de perfil"
+              className="w-full text-base sm:text-xl border border-gray-300 rounded-xl px-2 sm:px-4 py-2 sm:py-3 placeholder:text-center"
+            />
+          </div>
+  
+          <button
+            type="submit"
+            className="w-40 sm:w-50 mx-auto block text-base sm:text-xl bg-sage text-white font-semibold py-2 rounded-xl"
+          >
+            Crear Cuenta
+          </button>
+        </form>
+      </div>
     </div>
-  );
+  );  
 };
 
 export default Registrar;

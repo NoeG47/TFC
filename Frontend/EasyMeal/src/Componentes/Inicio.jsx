@@ -5,10 +5,10 @@ const Inicio = () => {
     return (
         <>
 
-            <h1 className="text-3xl font-bold mb-7 text-center mt-20 z-10">
+            <h1 className="text-6xl font-bold mb-7 text-center mt-20 z-10">
                 Tu comida, tu plan.<br />Empieza desde tu <br /> nevera.
             </h1>
-            <p className="max-w-xl text-md mb-7 text-center z-10">
+            <p className="max-w-xl text-xl mb-7 text-center z-10">
                 No necesitas más ingredientes, solo organización.
                 Descubre recetas y planifica tu semana usando lo que ya tienes
                 en casa. Rápido, inteligente y sin desperdicios.
@@ -25,17 +25,17 @@ const Inicio = () => {
 
             <Link
                 to="/login"
-                className="bg-sage text-white px-6 py-2 rounded-md mb-4 w-auto hover:bg-mint hover:scale-105 transform transition duration-300 text-center"
+                className="bg-sage text-white px-6 py-2 rounded-md mb-4 w-auto hover:bg-mint hover:scale-105 transform transition duration-300 text-center text-2xl"
             >
                 Iniciar sesión
             </Link>
 
 
-            <div className="flex flex-col justify-center items-center mb-20"
+            <div className="flex flex-col justify-center items-center mb-20 text-2xl"
             >
                 <p>¿Aún no tienes cuenta?</p>
                 <p className="text-center">
-                    <a className="italic font-bold text-black px-2 py-1 bg-[url('/images/index/fondo_texto.png')] bg-cover bg-center rounded -mr-2" href="#">¡Regístrate </a>gratis y empieza a planificar mejor!
+                    <a className="italic font-bold text-black px-2 py-1 bg-[url('/images/index/fondo_texto.png')] bg-cover bg-center rounded -mr-2" href="/registrar">¡Regístrate </a>gratis y empieza a planificar mejor!
                 </p>
 
             </div>

@@ -45,18 +45,23 @@ const Header = () => {
           />
         </div>
 
-        {usuario && (
-          <img
-            src={usuario.imagen_perfil}
-            alt="Perfil"
-            className="w-10 h-10 rounded-full border-2 border-white cursor-pointer"
-            title={usuario.nombre}
-            onClick={toggleModal}
-          />
-        )}
+        {/* Contenedor de la imagen de perfil y el menú */}
+        <div className="flex items-center space-x-4">
+          {/* Imagen de usuario (solo si está logueado) */}
+          {usuario && (
+            <img
+              src={usuario.imagen_perfil}
+              alt="Perfil"
+              className="w-10 md:w-15 h-10 md:h-15 rounded-full border-2 border-white cursor-pointer"
+              title={usuario.nombre}
+              onClick={toggleModal}
+            />
+          )}
 
-        <div className="text-2xl md:text-3xl lg:text-4xl cursor-pointer" onClick={AbrirMenu}>
-          ≡
+          {/* Icono de hamburguesa */}
+          <div className="w-10 md:w-16 h-15 text-5xl cursor-pointer" onClick={AbrirMenu}>
+            ≡
+          </div>
         </div>
       </header>
 
@@ -66,32 +71,45 @@ const Header = () => {
       {/* Modal para mostrar la información del usuario */}
       {usuario && (
         <Modal isOpen={modalAbierto} onClose={toggleModal}>
-          <div className="text-xl font-semibold mb-4">Información del Usuario</div>
-          <div className="mb-2">
-            <strong>Nombre:</strong> {usuario.nombre}
-          </div>
-          <div className="mb-2">
-            <strong>Correo:</strong> {usuario.correo}
-          </div>
-          <div className="mb-2">
-            <strong>Fecha de creación:</strong> {new Date(usuario.fechaCreacion).toLocaleDateString()}
-          </div>
-          <div className="mb-2">
-            <strong>Imagen de perfil:</strong>
-            <img
-              src={usuario.imagen_perfil}
-              alt="Imagen de perfil"
-              className="w-20 h-20 rounded-full border-2 border-gray-300 mt-2"
-            />
-          </div>
+          <div className="flex flex-col items-center gap-6">
+            <div className="text-3xl font-semibold mb-4 text-center p">Información del Usuario</div>
 
-          {/* Botón de cerrar sesión dentro del modal */}
-          <button
-            className="mt-4 bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition-colors"
-            onClick={handleLogout}
-          >
-            Cerrar sesión
-          </button>
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-6 w-full">
+              {/* Imagen de perfil */}
+              <img
+                src={usuario.imagen_perfil}
+                alt="Imagen de perfil"
+                className="w-24 h-24 rounded-full border-2 border-gray-300"
+              />
+              <div className="text-xl flex flex-col gap-2">
+                <p>
+                  <strong>Nombre:</strong> {usuario.nombre}
+                </p>
+                <p>
+                  <strong>Fecha de creación:</strong>
+                  {new Date(usuario.fechaCreacion).toLocaleDateString()}
+                </p>
+              </div>
+            </div>
+
+            <div className="text-xl flex flex-col gap-2 w-full">
+              <p>
+                <strong>Correo:</strong> {usuario.correo}
+              </p>
+              <p>
+                <strong>Contraseña:</strong> ********
+              </p>
+            </div>
+
+            <div className="flex justify-center w-full mt-4">
+              <button
+                className="bg-burnt-orange text-white px-6 py-2 rounded-xl"
+                onClick={handleLogout}
+              >
+                Cerrar sesión
+              </button>
+            </div>
+          </div>
         </Modal>
       )}
     </>
