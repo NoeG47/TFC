@@ -9,7 +9,7 @@ const Registrar = () => {
     nombre: '',
     contraseña: '',
     correo: '',
-    imagen_perfil: null, // Imagen de perfil
+    imagen_perfil: '', // Imagen de perfil
     receta: null, // Receta vacía
     fechaCreacion: new Date().toISOString(), // Fecha de creación
   });
@@ -17,17 +17,10 @@ const Registrar = () => {
   const gestionarCambio = (e) => {
     const { name, value, type } = e.target;
 
-    if (type === "file") {
-      setForm({
-        ...form,
-        [name]: e.target.files[0],
-      });
-    } else {
-      setForm({
-        ...form,
-        [name]: value,
-      });
-    }
+    setForm({
+      ...form,
+      [name]: value,
+    });
   };
 
   const validar = () => {
@@ -55,7 +48,7 @@ const Registrar = () => {
         nombre: form.nombre,
         contraseña: hashedPassword,
         correo: form.correo,
-        imagen_perfil: form.imagen_perfil? form.imagen_perfil.name : "",
+        imagen_perfil: form.imagen_perfil,
         receta: null,
         fechaCreacion: form.fechaCreacion,
       };
@@ -118,10 +111,11 @@ const Registrar = () => {
 
         <input
           id="imagen_perfil"
-          type="file"
+          type="text"
           name="imagen_perfil"
+          value={form.imagen_perfil}
           onChange={gestionarCambio}
-          accept="image/*"
+          placeholder="URL de la imagen de perfil"
         />
         <button className="submit-button" type="submit">Crear Cuenta</button>
       </form>
