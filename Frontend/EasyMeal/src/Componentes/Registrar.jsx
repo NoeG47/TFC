@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import bcrypt from "bcryptjs";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ServicioUsuario from "../ServicioLogin/ServicioUsuario";  // Importa el servicio de usuario
 
@@ -13,6 +14,8 @@ const Registrar = () => {
     receta: null, // Receta vacía
     fechaCreacion: new Date().toISOString(), // Fecha de creación
   });
+  const navigate = useNavigate();
+
 
   const gestionarCambio = (e) => {
     const { name, value, type } = e.target;
@@ -61,6 +64,8 @@ const Registrar = () => {
             text: "Tu usuario ha sido registrado correctamente.",
             icon: "success",
             confirmButtonText: "OK",
+          }).then(() => {
+            navigate("/login");  // redirige al login
           });
         })
         .catch((error) => {
