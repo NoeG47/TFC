@@ -21,7 +21,6 @@ const registrarUsuario = async (usuarioNuevo) => {
   }
 };
 
-// 🔑 LOGIN por correo (simple)
 const buscarUsuarioPorCorreo = async (correo) => {
   try {
     const response = await http.get("/usuarios"); // obtiene todos

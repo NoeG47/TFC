@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Menu_lateral from "./Menu_lateral";
 import { useAuth } from "../login/AuthProvider";
 import Modal from "./Modal";
-import { useNavigate } from "react-router-dom"; // Importar useNavigate
+import { useNavigate } from "react-router-dom"; 
 
 const Header = () => {
   // Variables para abrir el menú
@@ -11,11 +11,11 @@ const Header = () => {
   // Para el modal
   const [modalAbierto, setModalAbierto] = useState(false);
 
-  // Para obtener el usuario logueado
+  // para obtener el usuario logueado
   const { usuario, logout } = useAuth();
   const navigate = useNavigate();
 
-  // Funciones para abrir/cerrar el menú lateral
+  // funciones para abrir/cerrar el menú lateral
   const AbrirMenu = () => {
     setMenu_abierto(!Menu_abierto);
   };
