@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// Componente MenuSuperior
+
 const Pagina404 = () => {
 
   return (

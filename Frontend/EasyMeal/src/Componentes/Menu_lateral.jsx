@@ -1,6 +1,17 @@
 import React from "react";
+import { useAuth } from "../login/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Menu_lateral = ({ Abierto, Cerrado }) => {
+    const { logout } = useAuth();
+    const navigate = useNavigate();
+  
+    const handleLogout = () => {
+      logout();
+      Cerrado();// cerrar el modal
+      navigate("/");
+    };
+  
     if (!Abierto)
         return null;
     return (
@@ -10,13 +21,13 @@ const Menu_lateral = ({ Abierto, Cerrado }) => {
 
             <nav className="flex flex-col fixed top-0 right-0 h-full bg-white shadow-lg z-50 w-50">
                 {/*dejar espacio entre los enlaces hasta el div final */}
-                <ul className="flex-grow text-2xl"> 
+                <ul className="flex-grow md:text-2xl text-xl"> 
                     <div className="font-bold text-right bg-peach h-23 sm:h-19.5 md:h-24 lg:h-28" onClick={Cerrado}>
-                        <a className="flex flex-col p-6 text-4xl">×</a></div>
+                        <a className="flex flex-col p-6 text-4xl cursor-pointer">×</a></div>
                     <li className="p-4"><a href="/">Inicio</a></li>
                     <li className="pl-4 pb-2"><a href="#">Recetas</a></li>
-                    <li className="pl-4 pb-2 pt-2"><a href="#">Perfil</a></li>
-                    <li className="pl-4 pb-2 pt-2"><a href="#">Cerrar Sesion</a></li>
+                    <li className="pl-4 pb-2 pt-2"><a href="/">Perfil</a></li>
+                    <li className="pl-4 pb-2 pt-2"><a href="#" onClick={handleLogout}>Cerrar Sesion</a></li>
 
                 </ul>
                 <div className="bg-peach h-20 sm:h-20 md:h-21 lg:h-24"></div>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Menu_lateral from "./Menu_lateral";
 import { useAuth } from "../login/AuthProvider";
 import Modal from "./Modal";
+import { useNavigate } from "react-router-dom"; // Importar useNavigate
 
 const Header = () => {
   // Variables para abrir el menú
@@ -12,6 +13,7 @@ const Header = () => {
 
   // Para obtener el usuario logueado
   const { usuario, logout } = useAuth();
+  const navigate = useNavigate();
 
   // Funciones para abrir/cerrar el menú lateral
   const AbrirMenu = () => {
@@ -32,6 +34,7 @@ const Header = () => {
     logout();  // Llama al método de logout del contexto
     setModalAbierto(false); // Cierra el modal después de cerrar sesión
     setMenu_abierto(false); // Cierra el menú si está abierto
+    navigate("/"); 
   };
 
   return (
@@ -71,10 +74,10 @@ const Header = () => {
       {/* Modal para mostrar la información del usuario */}
       {usuario && (
         <Modal isOpen={modalAbierto} onClose={toggleModal}>
-          <div className="flex flex-col items-center gap-6">
+          <div className="flex flex-col items-start md:items-center gap-6 w-full">
             <div className="text-3xl font-semibold mb-4 text-center p">Información del Usuario</div>
 
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-6 w-full">
+            <div className="flex flex-col md:flex-row md:items-start gap-6 w-full">
               {/* Imagen de perfil */}
               <img
                 src={usuario.imagen_perfil}
@@ -92,7 +95,7 @@ const Header = () => {
               </div>
             </div>
 
-            <div className="text-xl flex flex-col gap-2 w-full">
+            <div className="text-xl flex flex-col gap-2 w-full -mt-3">
               <p>
                 <strong>Correo:</strong> {usuario.correo}
               </p>
@@ -103,7 +106,7 @@ const Header = () => {
 
             <div className="flex justify-center w-full mt-4">
               <button
-                className="bg-burnt-orange text-white px-6 py-2 rounded-xl"
+                className="bg-burnt-orange text-white px-4 py-2 text-sm md:text-base rounded-xl"
                 onClick={handleLogout}
               >
                 Cerrar sesión
