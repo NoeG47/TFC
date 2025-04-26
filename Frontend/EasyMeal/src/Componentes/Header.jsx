@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Menu_lateral from "./Menu_lateral";
 import { useAuth } from "../login/AuthProvider";
 import Modal from "./Modal";
-import { useNavigate } from "react-router-dom"; 
-import Swal from 'sweetalert2';
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import ServicioUsuario from "../ServicioLogin/ServicioUsuario";
-import bcrypt from 'bcryptjs';
+import bcrypt from "bcryptjs";
 
 const Header = () => {
   // Variables para abrir el menú
@@ -15,7 +15,7 @@ const Header = () => {
   const [modalAbierto, setModalAbierto] = useState(false);
 
   // para obtener el usuario logueado
-  const { usuario, logout,updateUsuario } = useAuth();
+  const { usuario, logout, updateUsuario } = useAuth();
   const navigate = useNavigate();
 
   // funciones para abrir/cerrar el menú lateral
@@ -34,10 +34,10 @@ const Header = () => {
 
   // Función para manejar el cierre de sesión
   const handleLogout = () => {
-    logout();  // Llama al método de logout del contexto
+    logout(); // Llama al método de logout del contexto
     setModalAbierto(false); // Cierra el modal después de cerrar sesión
     setMenu_abierto(false); // Cierra el menú si está abierto
-    navigate("/"); 
+    navigate("/");
   };
   const editarNombre = async () => {
     const { value: nuevoNombre } = await Swal.fire({
@@ -47,7 +47,7 @@ const Header = () => {
       inputPlaceholder: "Introduce tu nuevo nombre",
       showCancelButton: true,
     });
-  
+
     if (nuevoNombre) {
       try {
         // Usa el id_usuario en lugar de usuario.id
@@ -56,14 +56,14 @@ const Header = () => {
           ...usuario,
           nombre: nuevoNombre,
         });
-        
+
         Swal.fire("¡Nombre actualizado!", "", "success");
       } catch (error) {
         Swal.fire("Error al actualizar el nombre", error.message, "error");
       }
     }
   };
-  
+
   // Función para editar contraseña
   const editarContraseña = async () => {
     const { value: nuevaContraseña } = await Swal.fire({
@@ -77,17 +77,19 @@ const Header = () => {
     if (nuevaContraseña) {
       try {
         // Ciframos la contraseña antes de enviarla al backend
-        const hashedPassword = await bcrypt.hash(nuevaContraseña, 10); 
+        const hashedPassword = await bcrypt.hash(nuevaContraseña, 10);
 
-        // 
-        await ServicioUsuario.actualizarContraseña(usuario.id_usuario, hashedPassword);
+        //
+        await ServicioUsuario.actualizarContrasena(
+          usuario.id_usuario,
+          hashedPassword
+        );
         Swal.fire("¡Contraseña actualizada!", "", "success");
       } catch (error) {
         Swal.fire("Error al actualizar la contraseña", error.message, "error");
       }
     }
   };
-
 
   return (
     <>
@@ -114,7 +116,10 @@ const Header = () => {
           )}
 
           {/* Icono de hamburguesa */}
-          <div className="w-10 md:w-16 h-15 text-5xl cursor-pointer" onClick={AbrirMenu}>
+          <div
+            className="w-10 md:w-16 h-15 text-5xl cursor-pointer"
+            onClick={AbrirMenu}
+          >
             ≡
           </div>
         </div>
@@ -127,7 +132,9 @@ const Header = () => {
       {usuario && (
         <Modal isOpen={modalAbierto} onClose={toggleModal}>
           <div className="flex flex-col items-start md:items-center gap-6 w-full">
-            <div className="text-3xl font-semibold mb-4 text-center p">Información del Usuario</div>
+            <div className="text-3xl font-semibold mb-4 text-center p">
+              Información del Usuario
+            </div>
 
             <div className="flex flex-col md:flex-row md:items-start gap-6 w-full">
               {/* Imagen de perfil */}

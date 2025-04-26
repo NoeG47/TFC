@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from './AuthProvider';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthProvider";
 import ServicioUsuario from "../ServicioLogin/ServicioUsuario";
 import bcrypt from "bcryptjs";
-import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Login = () => {
-  const [correo, setCorreo] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [correo, setCorreo] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { login } = useAuth(); // Función para guardar usuario en el contexto
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ const Login = () => {
         return;
       }
 
-      const hashGuardado = usuario.contraseña;
+      const hashGuardado = usuario.contrasena;
       const esCorrecta = bcrypt.compareSync(password, hashGuardado);
 
       if (!esCorrecta) {
@@ -35,7 +35,7 @@ const Login = () => {
       // Éxito: redirigir
       Swal.fire("Sesión iniciada", "", "success");
       login(usuario);
-      navigate('/ingredientes');
+      navigate("/ingredientes");
     } catch (error) {
       console.error("Error en login:", error);
       setError("Error al intentar iniciar sesión");
@@ -45,7 +45,9 @@ const Login = () => {
   return (
     <div className="min-h-[80vh] flex items-center justify-center bg-white px-6 sm:px-12 md:px-20 py-8">
       <div className="bg-white border border-black rounded-2xl py-10 px-6 sm:px-12 w-full max-w-2xl space-y-6">
-        <h2 className="text-2xl sm:text-4xl font-semibold text-center">Bienvenid@ a EasyMeal</h2>
+        <h2 className="text-2xl sm:text-4xl font-semibold text-center">
+          Bienvenid@ a EasyMeal
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <input

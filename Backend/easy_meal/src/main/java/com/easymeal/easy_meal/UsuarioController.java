@@ -47,7 +47,7 @@ public class UsuarioController {
         return usuarioRepository.findById(id).map(usuario -> {
             usuario.setNombre(usuarioActualizado.getNombre());
             usuario.setCorreo(usuarioActualizado.getCorreo());
-            usuario.setContraseña(usuarioActualizado.getContraseña());
+            usuario.setContrasena(usuarioActualizado.getContrasena());
             usuario.setImagen_perfil(usuarioActualizado.getImagen_perfil());
             return usuarioRepository.save(usuario);
         }).orElseGet(() -> {
@@ -75,12 +75,12 @@ public class UsuarioController {
     }
 
     // Actualizar solo la contraseña de un usuario
-    @PutMapping("/{id}/contraseña")
-    public Usuario actualizarContraseña(@PathVariable Long id, @RequestBody Map<String, String> body) {
-        String nuevaContraseña = body.get("contraseña");
+    @PutMapping("/{id}/contrasena")
+    public Usuario actualizarContrasena(@PathVariable Long id, @RequestBody Map<String, String> body) {
+        String nuevaContrasena = body.get("contrasena");
 
         return usuarioRepository.findById(id).map(usuario -> {
-            usuario.setContraseña(nuevaContraseña);
+            usuario.setContrasena(nuevaContrasena);
             return usuarioRepository.save(usuario);
         }).orElse(null); // Si no se encuentra el usuario, retorna null
     }

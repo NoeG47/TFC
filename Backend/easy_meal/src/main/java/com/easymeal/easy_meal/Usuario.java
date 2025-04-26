@@ -24,8 +24,8 @@ public class Usuario {
     private Long id_usuario;
 
     private String nombre;
-    private String correo;
-    private String contraseña;
+
+    private String contrasena;
     private String imagen_perfil;
 
     @Column(name = "fecha_creacion")
@@ -36,17 +36,19 @@ public class Usuario {
     @JsonManagedReference
     private List<Receta> recetas = new ArrayList<>();
 
+    private String correo;
+
     // Constructor vacío
     public Usuario() {
     }
 
     // Constructor completo
-    public Usuario(Long id_usuario, String nombre, String correo, String contraseña, String imagen_perfil,
+    public Usuario(Long id_usuario, String nombre, String correo, String contrasena, String imagen_perfil,
             LocalDateTime fechaCreacion, List<Receta> recetas) {
         this.id_usuario = id_usuario;
         this.nombre = nombre;
         this.correo = correo;
-        this.contraseña = contraseña;
+        this.contrasena = contrasena;
         this.imagen_perfil = imagen_perfil;
         this.fechaCreacion = fechaCreacion;
         this.recetas = recetas;
@@ -78,12 +80,12 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public String getImagen_perfil() {

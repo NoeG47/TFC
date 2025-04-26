@@ -8,7 +8,7 @@ const registrarUsuario = async (usuarioNuevo) => {
     const usuarioParaEnviar = {
       nombre: usuarioNuevo.nombre,
       correo: usuarioNuevo.correo,
-      contraseña: usuarioNuevo.contraseña, // muy importante: "contraseña", no "pass"
+      contrasena: usuarioNuevo.contrasena, // muy importante: "contraseña", no "pass"
       imagen_perfil: usuarioNuevo.imagen_perfil || "", // puedes usar null también
       fechaCreacion: usuarioNuevo.fechaCreacion || new Date().toISOString(), // por si acaso
     };
@@ -34,7 +34,9 @@ const buscarUsuarioPorCorreo = async (correo) => {
 // Actualizar nombre de usuario
 const actualizarNombre = async (id, nuevoNombre) => {
   try {
-    const response = await http.put(`/usuarios/${id}/nombre`, { nombre: nuevoNombre });
+    const response = await http.put(`/usuarios/${id}/nombre`, {
+      nombre: nuevoNombre,
+    });
     return response.data;
   } catch (error) {
     console.error("Error al actualizar el nombre:", error);
@@ -43,9 +45,11 @@ const actualizarNombre = async (id, nuevoNombre) => {
 };
 
 // Actualizar contraseña de usuario
-const actualizarContraseña = async (id, nuevaContraseña) => {
+const actualizarContrasena = async (id, nuevaContrasena) => {
   try {
-    const response = await http.put(`/usuarios/${id}/contraseña`, { contraseña: nuevaContraseña });
+    const response = await http.put(`/usuarios/${id}/contrasena`, {
+      contrasena: nuevaContrasena,
+    });
     return response.data;
   } catch (error) {
     console.error("Error al actualizar la contraseña:", error);
@@ -57,5 +61,5 @@ export default {
   registrarUsuario,
   buscarUsuarioPorCorreo,
   actualizarNombre,
-  actualizarContraseña,
+  actualizarContrasena,
 };

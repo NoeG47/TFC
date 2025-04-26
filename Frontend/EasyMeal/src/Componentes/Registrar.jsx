@@ -8,7 +8,7 @@ const Registrar = () => {
   const [errores, setErrores] = useState({});
   const [form, setForm] = useState({
     nombre: '',
-    contraseña: '',
+    contrasena: '',
     correo: '',
     imagen_perfil: '', // Imagen de perfil
     receta: null, // Receta vacía
@@ -31,8 +31,8 @@ const Registrar = () => {
 
     if (!form.nombre.trim()) nuevosErrores.nombre = 'El nombre es obligatorio';
     if (!form.correo.trim()) nuevosErrores.correo = 'El correo es obligatorio';
-    if (!form.contraseña.trim()) nuevosErrores.contraseña = 'La contraseña es obligatoria';
-    else if (form.contraseña.length < 6) nuevosErrores.contraseña = 'La contraseña debe tener al menos 6 caracteres';
+    if (!form.contrasena.trim()) nuevosErrores.contrasena = 'La contrasena es obligatoria';
+    else if (form.contrasena.length < 6) nuevosErrores.contrasena = 'La contraseña debe tener al menos 6 caracteres';
     
     return nuevosErrores;
   };
@@ -45,11 +45,11 @@ const Registrar = () => {
     if (Object.keys(nuevosErrores).length === 0) {
       // Cifrado de la contraseña
       const salt = bcrypt.genSaltSync(10);
-      const hashedPassword = bcrypt.hashSync(form.contraseña, salt);
+      const hashedPassword = bcrypt.hashSync(form.contrasena, salt);
 
       const usuarioNuevo = {
         nombre: form.nombre,
-        contraseña: hashedPassword,
+        contrasena: hashedPassword,
         correo: form.correo,
         imagen_perfil: form.imagen_perfil,
         receta: null,
@@ -121,17 +121,17 @@ const Registrar = () => {
   
           <div>
             <input
-              id="contraseña"
+              id="contrasena"
               type="password"
-              name="contraseña"
-              value={form.contraseña}
+              name="contrasena"
+              value={form.contrasena}
               onChange={gestionarCambio}
               placeholder="Contraseña"
               className="w-full text-base md:text-xl border border-gray-300 rounded-xl px-2 sm:px-4 py-2 sm:py-3 placeholder:text-center"
             />
-            {errores.contraseña && (
+            {errores.contrasena && (
               <p className="text-base md:text-xl text-red-500 bg-red-100 px-3 py-2 rounded text-center">
-                {errores.contraseña}
+                {errores.contrasena}
               </p>
             )}
           </div>
