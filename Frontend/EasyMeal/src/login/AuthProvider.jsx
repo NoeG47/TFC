@@ -9,7 +9,10 @@ export const useAuth = () => useContext(AuthContext);
 // Componente proveedor del contexto
 export const AuthProvider = ({ children }) => {
   const [usuario, setUsuario] = useState(null);
-  
+
+  const updateUsuario = (nuevoUsuario) => {
+    setUsuario(nuevoUsuario);
+  };
   useEffect(() => {
     const usuarioGuardado = sessionStorage.getItem("usuario");
     if (usuarioGuardado) {
@@ -28,7 +31,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ usuario, login, logout }}>
+    <AuthContext.Provider value={{ usuario, login, logout,updateUsuario }}>
       {children}
     </AuthContext.Provider>
   );

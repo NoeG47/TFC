@@ -15,7 +15,7 @@ const Header = () => {
   const [modalAbierto, setModalAbierto] = useState(false);
 
   // para obtener el usuario logueado
-  const { usuario, logout } = useAuth();
+  const { usuario, logout,updateUsuario } = useAuth();
   const navigate = useNavigate();
 
   // funciones para abrir/cerrar el menú lateral
@@ -52,6 +52,11 @@ const Header = () => {
       try {
         // Usa el id_usuario en lugar de usuario.id
         await ServicioUsuario.actualizarNombre(usuario.id_usuario, nuevoNombre);
+        updateUsuario({
+          ...usuario,
+          nombre: nuevoNombre,
+        });
+        
         Swal.fire("¡Nombre actualizado!", "", "success");
       } catch (error) {
         Swal.fire("Error al actualizar el nombre", error.message, "error");
@@ -72,9 +77,9 @@ const Header = () => {
     if (nuevaContraseña) {
       try {
         // Ciframos la contraseña antes de enviarla al backend
-        const hashedPassword = await bcrypt.hash(nuevaContraseña, 10); // El número 10 es el saltRounds
+        const hashedPassword = await bcrypt.hash(nuevaContraseña, 10); 
 
-        // Usa el id_usuario en lugar de usuario.id
+        // 
         await ServicioUsuario.actualizarContraseña(usuario.id_usuario, hashedPassword);
         Swal.fire("¡Contraseña actualizada!", "", "success");
       } catch (error) {
