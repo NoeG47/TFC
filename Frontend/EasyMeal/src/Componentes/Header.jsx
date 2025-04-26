@@ -3,6 +3,9 @@ import Menu_lateral from "./Menu_lateral";
 import { useAuth } from "../login/AuthProvider";
 import Modal from "./Modal";
 import { useNavigate } from "react-router-dom"; 
+import Swal from 'sweetalert2';
+import ServicioUsuario from "../ServicioLogin/ServicioUsuario";
+import bcrypt from 'bcryptjs';
 
 const Header = () => {
   // Variables para abrir el menú
@@ -36,6 +39,50 @@ const Header = () => {
     setMenu_abierto(false); // Cierra el menú si está abierto
     navigate("/"); 
   };
+  const editarNombre = async () => {
+    const { value: nuevoNombre } = await Swal.fire({
+      title: "Editar Nombre",
+      input: "text",
+      inputLabel: "Nuevo nombre",
+      inputPlaceholder: "Introduce tu nuevo nombre",
+      showCancelButton: true,
+    });
+  
+    if (nuevoNombre) {
+      try {
+        // Usa el id_usuario en lugar de usuario.id
+        await ServicioUsuario.actualizarNombre(usuario.id_usuario, nuevoNombre);
+        Swal.fire("¡Nombre actualizado!", "", "success");
+      } catch (error) {
+        Swal.fire("Error al actualizar el nombre", error.message, "error");
+      }
+    }
+  };
+  
+  // Función para editar contraseña
+  const editarContraseña = async () => {
+    const { value: nuevaContraseña } = await Swal.fire({
+      title: "Editar Contraseña",
+      input: "password",
+      inputLabel: "Nueva contraseña",
+      inputPlaceholder: "Introduce tu nueva contraseña",
+      showCancelButton: true,
+    });
+
+    if (nuevaContraseña) {
+      try {
+        // Ciframos la contraseña antes de enviarla al backend
+        const hashedPassword = await bcrypt.hash(nuevaContraseña, 10); // El número 10 es el saltRounds
+
+        // Usa el id_usuario en lugar de usuario.id
+        await ServicioUsuario.actualizarContraseña(usuario.id_usuario, hashedPassword);
+        Swal.fire("¡Contraseña actualizada!", "", "success");
+      } catch (error) {
+        Swal.fire("Error al actualizar la contraseña", error.message, "error");
+      }
+    }
+  };
+
 
   return (
     <>
@@ -87,6 +134,12 @@ const Header = () => {
               <div className="text-xl flex flex-col gap-2">
                 <p>
                   <strong>Nombre:</strong> {usuario.nombre}
+                  <button
+                    onClick={editarNombre}
+                    className="ml-2 bg-blue-500 text-white px-2 py-1 rounded text-sm"
+                  >
+                    Editar
+                  </button>
                 </p>
                 <p>
                   <strong>Fecha de creación:</strong>
@@ -101,6 +154,12 @@ const Header = () => {
               </p>
               <p>
                 <strong>Contraseña:</strong> ********
+                <button
+                  onClick={editarContraseña}
+                  className="ml-2 bg-blue-500 text-white px-2 py-1 rounded text-sm"
+                >
+                  Editar
+                </button>
               </p>
             </div>
 

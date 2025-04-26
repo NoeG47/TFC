@@ -1,6 +1,7 @@
 package com.easymeal.easy_meal;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,10 +55,31 @@ public class UsuarioController {
             return usuarioRepository.save(usuarioActualizado);
         });
     }
+    
 
     // Eliminar un usuario
     @DeleteMapping("/{id}")
     public void eliminarUsuario(@PathVariable Long id) {
         usuarioRepository.deleteById(id);
+    }
+    @PutMapping("/{id}/nombre")
+    public Usuario actualizarNombre(@PathVariable Long id, @RequestBody Map<String, String> body) {
+        String nuevoNombre = body.get("nombre");
+
+        return usuarioRepository.findById(id).map(usuario -> {
+            usuario.setNombre(nuevoNombre);
+            return usuarioRepository.save(usuario);
+        }).orElse(null);  // Si no se encuentra el usuario, retorna null
+    }
+
+    // Actualizar solo la contraseña de un usuario
+    @PutMapping("/{id}/contraseña")
+    public Usuario actualizarContraseña(@PathVariable Long id, @RequestBody Map<String, String> body) {
+        String nuevaContraseña = body.get("contraseña");
+
+        return usuarioRepository.findById(id).map(usuario -> {
+            usuario.setContraseña(nuevaContraseña);
+            return usuarioRepository.save(usuario);
+        }).orElse(null);  // Si no se encuentra el usuario, retorna null
     }
 }

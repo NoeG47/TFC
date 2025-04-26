@@ -13,6 +13,10 @@ public class EasyMealApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EasyMealApplication.class, args);
 	}
+	
+
+
+
 	/*
 	 * @Bean
 	public CommandLineRunner demo(UsuarioRepositorio usuarioRepository,RecetaRepositorio recetaRepo) {
@@ -44,7 +48,7 @@ public class EasyMealApplication {
 			recetaRepo.save(receta1);
 			recetaRepo.save(receta2);
 
-			System.out.println("✅ Usuario creado exitosamente");
+			System.out.println(" Usuario creado exitosamente");
 		};
 }
 	 */

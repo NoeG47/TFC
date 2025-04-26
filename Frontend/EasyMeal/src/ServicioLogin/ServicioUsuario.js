@@ -31,8 +31,31 @@ const buscarUsuarioPorCorreo = async (correo) => {
     throw error;
   }
 };
+// Actualizar nombre de usuario
+const actualizarNombre = async (id, nuevoNombre) => {
+  try {
+    const response = await http.put(`/usuarios/${id}/nombre`, { nombre: nuevoNombre });
+    return response.data;
+  } catch (error) {
+    console.error("Error al actualizar el nombre:", error);
+    throw error;
+  }
+};
+
+// Actualizar contraseña de usuario
+const actualizarContraseña = async (id, nuevaContraseña) => {
+  try {
+    const response = await http.put(`/usuarios/${id}/contraseña`, { contraseña: nuevaContraseña });
+    return response.data;
+  } catch (error) {
+    console.error("Error al actualizar la contraseña:", error);
+    throw error;
+  }
+};
 
 export default {
   registrarUsuario,
   buscarUsuarioPorCorreo,
+  actualizarNombre,
+  actualizarContraseña,
 };
