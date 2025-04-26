@@ -35,7 +35,7 @@ const Login = () => {
       // Éxito: redirigir
       Swal.fire("Sesión iniciada", "", "success");
       login(usuario);
-      navigate("/ingredientes");
+      navigate("/nevera");
     } catch (error) {
       console.error("Error en login:", error);
       setError("Error al intentar iniciar sesión");

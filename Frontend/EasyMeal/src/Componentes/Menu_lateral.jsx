@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth } from "../login/AuthProvider";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 const Menu_lateral = ({ Abierto, Cerrado }) => {
   const { logout } = useAuth();
   const navigate = useNavigate();
@@ -11,8 +11,7 @@ const Menu_lateral = ({ Abierto, Cerrado }) => {
     Cerrado();
     navigate("/");
   };
-  if (!Abierto)
-    return null;
+
   return (
     <>
       {/* Fondo oscuro */}
@@ -32,7 +31,7 @@ const Menu_lateral = ({ Abierto, Cerrado }) => {
       >
         {/* Botón cerrar */}
         <div
-          className="font-bold text-right bg-peach h-24 sm:h-20 md:h-24 lg:h-28 flex items-center justify-end pr-6"
+          className="font-bold text-right bg-peach h-24 sm:h-20 md:h-24 lg:h-32 flex items-center justify-end pr-6"
           onClick={Cerrado}
         >
           <button className="text-4xl cursor-pointer">×</button>
@@ -41,21 +40,27 @@ const Menu_lateral = ({ Abierto, Cerrado }) => {
         {/* Lista de enlaces */}
         <ul className="flex-grow md:text-2xl text-xl flex flex-col">
           <li className="p-4">
-            <a href="/">Inicio</a>
+            <Link to="/" onClick={Cerrado}>
+              Inicio
+            </Link>
           </li>
           <li className="p-4">
-            <a href="/">Mi nevera</a>
+            <Link to="/nevera" onClick={Cerrado}>
+              Mi Nevera
+            </Link>
           </li>
           <li className="p-4">
-            <a href="#">Recetas</a>
+            <Link to="/recetas" onClick={Cerrado}>
+              Recetas
+            </Link>
           </li>
           <li className="p-4">
-            <a href="/">Perfil</a>
+            <Link to="/perfil" onClick={Cerrado}>
+              Perfil
+            </Link>
           </li>
-          <li className="p-4">
-            <a href="#" onClick={handleLogout}>
-              Cerrar Sesión
-            </a>
+          <li className="p-4 cursor-pointer" onClick={handleLogout}>
+            Cerrar Sesión
           </li>
         </ul>
 

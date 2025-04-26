@@ -14,31 +14,25 @@ const Header = () => {
   // Para el modal
   const [modalAbierto, setModalAbierto] = useState(false);
 
-  // para obtener el usuario logueado
+  // Para obtener el usuario logueado
   const { usuario, logout, updateUsuario } = useAuth();
   const navigate = useNavigate();
 
-  // funciones para abrir/cerrar el menú lateral
-  const AbrirMenu = () => {
-    setMenu_abierto(!Menu_abierto);
-  };
-
-  const CerrarMenu = () => {
-    setMenu_abierto(false);
-  };
+  // Funciones para abrir/cerrar el menú lateral
+  const AbrirMenu = () => setMenu_abierto(!Menu_abierto);
+  const CerrarMenu = () => setMenu_abierto(false);
 
   // Función para abrir/cerrar el modal
-  const toggleModal = () => {
-    setModalAbierto(!modalAbierto);
-  };
+  const toggleModal = () => setModalAbierto(!modalAbierto);
 
   // Función para manejar el cierre de sesión
   const handleLogout = () => {
-    logout(); // Llama al método de logout del contexto
-    setModalAbierto(false); // Cierra el modal después de cerrar sesión
-    setMenu_abierto(false); // Cierra el menú si está abierto
-    navigate("/");
+    logout();
+    setModalAbierto(false);
+    setMenu_abierto(false);
+    navigate("/", { replace: true });
   };
+
   const editarNombre = async () => {
     const { value: nuevoNombre } = await Swal.fire({
       title: "Editar Nombre",
@@ -50,13 +44,11 @@ const Header = () => {
 
     if (nuevoNombre) {
       try {
-        // Usa el id_usuario en lugar de usuario.id
         await ServicioUsuario.actualizarNombre(usuario.id_usuario, nuevoNombre);
         updateUsuario({
           ...usuario,
           nombre: nuevoNombre,
         });
-
         Swal.fire("¡Nombre actualizado!", "", "success");
       } catch (error) {
         Swal.fire("Error al actualizar el nombre", error.message, "error");
@@ -64,7 +56,6 @@ const Header = () => {
     }
   };
 
-  // Función para editar contraseña
   const editarContraseña = async () => {
     const { value: nuevaContraseña } = await Swal.fire({
       title: "Editar Contraseña",
@@ -76,10 +67,7 @@ const Header = () => {
 
     if (nuevaContraseña) {
       try {
-        // Ciframos la contraseña antes de enviarla al backend
         const hashedPassword = await bcrypt.hash(nuevaContraseña, 10);
-
-        //
         await ServicioUsuario.actualizarContrasena(
           usuario.id_usuario,
           hashedPassword
@@ -94,30 +82,31 @@ const Header = () => {
   return (
     <>
       <header className="w-full flex bg-peach items-center justify-between p-4 shadow-lg">
-        <div>
+        {/* Logo + Título */}
+        <div className="flex items-center space-x-4">
           <img
             src="../images/logo.ico"
             alt="EasyMeal Logo"
-            className="w-12 md:w-16 lg:w-20 h-auto"
+            className="w-16 md:w-20 lg:w-24 h-auto"
           />
+          <span className="text-2xl md:text-3xl font-bold text-sage">
+            EasyMeal
+          </span>
         </div>
 
-        {/* Contenedor de la imagen de perfil y el menú */}
+        {/* Imagen de perfil + Icono menú */}
         <div className="flex items-center space-x-4">
-          {/* Imagen de usuario (solo si está logueado) */}
           {usuario && (
             <img
               src={usuario.imagen_perfil}
               alt="Perfil"
-              className="w-10 md:w-15 h-10 md:h-15 rounded-full border-2 border-white cursor-pointer"
+              className="w-10 md:w-12 h-10 md:h-12 rounded-full border-2 border-white cursor-pointer"
               title={usuario.nombre}
               onClick={toggleModal}
             />
           )}
-
-          {/* Icono de hamburguesa */}
           <div
-            className="w-10 md:w-16 h-15 text-5xl cursor-pointer"
+            className="w-10 md:w-12 text-5xl cursor-pointer flex items-center justify-center"
             onClick={AbrirMenu}
           >
             ≡
@@ -125,19 +114,18 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Llamamos al componente del menú lateral */}
+      {/* Menú lateral */}
       <Menu_lateral Abierto={Menu_abierto} Cerrado={CerrarMenu} />
 
-      {/* Modal para mostrar la información del usuario */}
+      {/* Modal usuario */}
       {usuario && (
         <Modal isOpen={modalAbierto} onClose={toggleModal}>
           <div className="flex flex-col items-start md:items-center gap-6 w-full">
-            <div className="text-3xl font-semibold mb-4 text-center p">
+            <div className="text-3xl font-semibold mb-4 text-center">
               Información del Usuario
             </div>
 
             <div className="flex flex-col md:flex-row md:items-start gap-6 w-full">
-              {/* Imagen de perfil */}
               <img
                 src={usuario.imagen_perfil}
                 alt="Imagen de perfil"
@@ -154,7 +142,7 @@ const Header = () => {
                   </button>
                 </p>
                 <p>
-                  <strong>Fecha de creación:</strong>
+                  <strong>Fecha de creación:</strong>{" "}
                   {new Date(usuario.fechaCreacion).toLocaleDateString()}
                 </p>
               </div>
