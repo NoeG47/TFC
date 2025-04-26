@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/usuarios")
-@CrossOrigin(origins = "http://localhost:5173") 
+@CrossOrigin(origins = "http://localhost:5173")
 public class UsuarioController {
 
     @Autowired
@@ -55,13 +55,15 @@ public class UsuarioController {
             return usuarioRepository.save(usuarioActualizado);
         });
     }
-    
 
     // Eliminar un usuario
     @DeleteMapping("/{id}")
     public void eliminarUsuario(@PathVariable Long id) {
-        usuarioRepository.deleteById(id);
+        if (usuarioRepository.existsById(id)) {
+            usuarioRepository.deleteById(id);
+        }
     }
+
     @PutMapping("/{id}/nombre")
     public Usuario actualizarNombre(@PathVariable Long id, @RequestBody Map<String, String> body) {
         String nuevoNombre = body.get("nombre");
@@ -69,7 +71,7 @@ public class UsuarioController {
         return usuarioRepository.findById(id).map(usuario -> {
             usuario.setNombre(nuevoNombre);
             return usuarioRepository.save(usuario);
-        }).orElse(null);  // Si no se encuentra el usuario, retorna null
+        }).orElse(null); // Si no se encuentra el usuario, retorna null
     }
 
     // Actualizar solo la contraseña de un usuario
@@ -80,6 +82,6 @@ public class UsuarioController {
         return usuarioRepository.findById(id).map(usuario -> {
             usuario.setContraseña(nuevaContraseña);
             return usuarioRepository.save(usuario);
-        }).orElse(null);  // Si no se encuentra el usuario, retorna null
+        }).orElse(null); // Si no se encuentra el usuario, retorna null
     }
 }

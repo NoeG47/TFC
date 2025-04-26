@@ -31,16 +31,18 @@ public class Usuario {
     @Column(name = "fecha_creacion")
     private LocalDateTime fechaCreacion = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    //para que no haya bucle infinito
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    // para que no haya bucle infinito
     @JsonManagedReference
     private List<Receta> recetas = new ArrayList<>();
 
     // Constructor vacío
-    public Usuario() {}
+    public Usuario() {
+    }
 
     // Constructor completo
-    public Usuario(Long id_usuario, String nombre, String correo, String contraseña, String imagen_perfil, LocalDateTime fechaCreacion, List<Receta> recetas) {
+    public Usuario(Long id_usuario, String nombre, String correo, String contraseña, String imagen_perfil,
+            LocalDateTime fechaCreacion, List<Receta> recetas) {
         this.id_usuario = id_usuario;
         this.nombre = nombre;
         this.correo = correo;
