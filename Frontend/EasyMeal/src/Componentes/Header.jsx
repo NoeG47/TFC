@@ -95,7 +95,7 @@ const Header = () => {
         </div>
 
         {/* Imagen de perfil + Icono menú */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center">
           {usuario && (
             <img
               src={usuario.imagen_perfil}
@@ -106,7 +106,7 @@ const Header = () => {
             />
           )}
           <div
-            className="w-10 md:w-12 text-5xl cursor-pointer flex items-center justify-center"
+            className="w-10 md:w-12 pb-2 text-5xl cursor-pointer flex items-center justify-center"
             onClick={AbrirMenu}
           >
             ≡
@@ -121,7 +121,7 @@ const Header = () => {
       {usuario && (
         <Modal isOpen={modalAbierto} onClose={toggleModal}>
           <div className="flex flex-col items-start md:items-center gap-6 w-full">
-            <div className="text-3xl font-semibold mb-4 text-center">
+            <div className=" text-2xl md:text-3xl font-semibold mb-4 text-center">
               Información del Usuario
             </div>
 

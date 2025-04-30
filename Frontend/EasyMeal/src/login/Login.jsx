@@ -76,13 +76,13 @@ const Login = () => {
           )}
           <button
             type="submit"
-            className="w-40 sm:w-50 mx-auto block text-base sm:text-xl bg-sage text-white font-semibold py-2 rounded-xl"
+            className="w-40 sm:w-50 mx-auto block text-base sm:text-xl bg-sage text-white font-semibold py-2 rounded-xl hover:bg-mint hover:scale-105 transform transition duration-300"
           >
             Acceder
           </button>
           <Link
             to="/registrar"
-            className="w-40 sm:w-50 mx-auto block text-base sm:text-xl bg-sage text-white text-center font-semibold py-2 rounded-xl"
+            className="w-40 sm:w-50 mx-auto block text-base sm:text-xl bg-sage text-white text-center font-semibold py-2 rounded-xl hover:bg-mint hover:scale-105 transform transition duration-300"
           >
             Registrarse
           </Link>

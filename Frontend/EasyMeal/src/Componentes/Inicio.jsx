@@ -6,10 +6,10 @@ const Inicio = () => {
         <>
             <div className="min-h-screen flex flex-col items-center justify-center bg-white relative py-8">
 
-                <h1 className="text-6xl font-bold mb-7 text-center mt-20 z-10">
+                <h1 className=" text-3xl sm:text-4xl md:text-6xl font-bold mb-7 text-center mt-20 z-10">
                     Tu comida, tu plan.<br />Empieza desde tu <br /> nevera.
                 </h1>
-                <p className="max-w-xl text-xl mb-7 text-center z-10">
+                <p className="max-w-xl text-base md:text-xl mb-7 text-center z-10 pr-5 pl-5">
                     No necesitas más ingredientes, solo organización.
                     Descubre recetas y planifica tu semana usando lo que ya tienes
                     en casa. Rápido, inteligente y sin desperdicios.
@@ -32,7 +32,7 @@ const Inicio = () => {
                 </Link>
 
 
-                <div className="flex flex-col justify-center items-center mb-20 text-2xl"
+                <div className="flex flex-col justify-center items-center mb-20 text-xl md:text-2xl z-10"
                 >
                     <p>¿Aún no tienes cuenta?</p>
                     <p className="text-center">
