@@ -1,14 +1,11 @@
 package com.easymeal.easy_meal;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "recetas")
@@ -20,26 +17,25 @@ public class Receta {
 
     private String nombre;
     private String descripcion;
-    private String ingredientes;
+
+    @ManyToMany
+    @JoinTable(name = "recetas_ingredientes", joinColumns = @JoinColumn(name = "id_receta"), inverseJoinColumns = @JoinColumn(name = "id_ingrediente"))
+    private Set<Ingrediente> ingredientes = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     @JsonBackReference
     private Usuario usuario;
 
-    // Constructor vacío
-    public Receta() {}
+    public Receta() {
+    }
 
-    // Constructor completo
-    public Receta(Long id_receta, String nombre, String descripcion, String ingredientes, Usuario usuario) {
-        this.id_receta = id_receta;
+    public Receta(String nombre, String descripcion, Set<Ingrediente> ingredientes, Usuario usuario) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.ingredientes = ingredientes;
         this.usuario = usuario;
     }
-
-    // Getters y Setters
 
     public Long getId_receta() {
         return id_receta;
@@ -65,11 +61,11 @@ public class Receta {
         this.descripcion = descripcion;
     }
 
-    public String getIngredientes() {
+    public Set<Ingrediente> getIngredientes() {
         return ingredientes;
     }
 
-    public void setIngredientes(String ingredientes) {
+    public void setIngredientes(Set<Ingrediente> ingredientes) {
         this.ingredientes = ingredientes;
     }
 
@@ -80,5 +76,4 @@ public class Receta {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
 }

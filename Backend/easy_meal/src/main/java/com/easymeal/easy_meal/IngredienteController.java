@@ -1,41 +1,44 @@
 package com.easymeal.easy_meal;
 
-import java.util.Arrays;
+import java.text.Normalizer;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/ingredientes")
-@CrossOrigin(origins = "*") // Para permitir que el frontend pueda pedirlo
+@CrossOrigin(origins = "*")
 public class IngredienteController {
 
+    @Autowired
+    private IngredienteRepository repo;
+
+    // Función local para eliminar tildes y pasar a minúsculas
+    private String normalizarTexto(String texto) {
+        if (texto == null)
+            return null;
+        String sinTildes = Normalizer.normalize(texto, Normalizer.Form.NFD)
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+        return sinTildes.toLowerCase();
+    }
+
     @GetMapping
-    public List<String> getIngredientes() {
-        return Arrays.asList(
-            "Aceite de girasol", "Aceite de oliva", "Acelga", "Agua", "Albahaca",
-            "Alcachofa", "Alioli", "Almeja", "Anís", "Arándanos", "Arroz",
-            "Avena", "Bacalao", "Berza", "Brócoli", "Brotes de soja",
-            "Cacao en polvo", "Calabacín", "Calamar", "Canela", "Cardamomo",
-            "Carne de ternera", "Cebada", "Cebolla", "Champiñón", "Chocolate blanco",
-            "Chocolate negro", "Chocolate puro", "Cilantro", "Clavo", "Col rizada",
-            "Coles de Bruselas", "Comino", "Cordero", "Cuscús", "Cúrcuma",
-            "Endibia", "Escarola", "Espinaca", "Fideos", "Frambuesas",
-            "Gamba", "Garbanzos", "Grano de café", "Guisantes", "Harina de maíz",
-            "Harina de trigo", "Hinojo", "Huevo", "Jengibre", "Judía verde",
-            "Ketchup", "Laurel", "Lechuga", "Leche", "Lentejas",
-            "Macarrones", "Maíz", "Mantequilla", "Mayonesa", "Merluza",
-            "Miel", "Mostaza", "Nabo", "Nuez moscada", "Orégano",
-            "Pan", "Pavo", "Pepinillo", "Pepino", "Perejil",
-            "Pimiento rojo", "Pimiento verde", "Pimentón dulce", "Pimentón picante", "Plátano",
-            "Pollo", "Pulpo", "Queso", "Queso rallado", "Rábano",
-            "Ravioli", "Remolacha", "Repollo", "Romero", "Rúcula",
-            "Sal", "Salsa de soja", "Salsa de tomate", "Salmón", "Setas",
-            "Spaguetti", "Tomate", "Tomate Concentrado", "Tomate Frito", "Tomillo",
-            "Trigo", "Vinagre", "Yogur"
-        );
+    public List<Ingrediente> getAll() {
+        return repo.findAll();
+    }
+
+    @PostMapping
+    public ResponseEntity<String> addIngrediente(@RequestBody Ingrediente nuevo) {
+        String nombreNormalizado = normalizarTexto(nuevo.getNombre());
+        System.out.println("Recibido: " + nuevo.getNombre() + " → Normalizado: " + nombreNormalizado);
+
+        boolean existe = repo.findByNombreIgnoreCase(nombreNormalizado).isPresent();
+        if (existe) {
+            return ResponseEntity.status(409).body("Ingrediente ya existe");
+        }
+        repo.save(new Ingrediente(nombreNormalizado));
+        return ResponseEntity.ok("Ingrediente añadido");
     }
 }

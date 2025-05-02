@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ServicioIngrediente from "../ServicioLogin/ServicioIngrediente";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import { FaSearch } from "react-icons/fa";
 // Componente Ingredientes
 const Ingredientes = () => {
-  const [ingredientes, setIngredientes] = useState([])
+  const [ingredientes, setIngredientes] = useState([]);
   const [paginaActual, setPaginaActual] = useState(1); //empieza por la 1
-  const ingredientesPorPagina = 8;//mostrar 8 por página
+  const ingredientesPorPagina = 8; //mostrar 8 por página
   //para coger todos los ingredientes solo una vez
   useEffect(() => {
     const cargarIngredientes = async () => {
@@ -15,18 +15,22 @@ const Ingredientes = () => {
         setIngredientes(data);
       } catch (error) {
         Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'No se pudieron cargar los ingredientes.',
+          icon: "error",
+          title: "Error",
+          text: "No se pudieron cargar los ingredientes.",
         });
       }
-    }
+    };
     cargarIngredientes();
-  }, [])
+  }, []);
   //no sé si es mejor añadir esto a un js
   const indiceUltimoIngrediente = paginaActual * ingredientesPorPagina;
-  const indicePrimerIngrediente = indiceUltimoIngrediente - ingredientesPorPagina;
-  const ingredientesActuales = ingredientes.slice(indicePrimerIngrediente, indiceUltimoIngrediente);
+  const indicePrimerIngrediente =
+    indiceUltimoIngrediente - ingredientesPorPagina;
+  const ingredientesActuales = ingredientes.slice(
+    indicePrimerIngrediente,
+    indiceUltimoIngrediente
+  );
 
   const totalPaginas = Math.ceil(ingredientes.length / ingredientesPorPagina);
 
@@ -38,34 +42,40 @@ const Ingredientes = () => {
     if (paginaActual < totalPaginas) setPaginaActual(paginaActual + 1);
   };
 
+  const capitalizar = (texto) =>
+    texto
+      .split(" ")
+      .map((palabra) => palabra.charAt(0).toUpperCase() + palabra.slice(1))
+      .join(" ");
+
   return (
     <>
       <div className="flex flex-col p-10 ">
         <h1 className="font-bold text-xl md:text-3xl my-2">Mi nevera</h1>
-        <h2 className="text-xl md:text-2xl my-8">¿Qué ingredientes quieres que tenga la receta?</h2>
+        <h2 className="text-xl md:text-2xl my-8">
+          ¿Qué ingredientes quieres que tenga la receta?
+        </h2>
 
         {/*AÑADIR LA FUNCIONALIDAD PARA LA BARRA DE BÚSQUEDA*/}
-         <div className="flex items-center gap-2 mb-8">
+        <div className="flex items-center gap-2 mb-8">
           <input
             type="text"
             placeholder="Buscar"
             className="border border-gray-300 rounded-lg px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <button
-            className="bg-gray-500 hover:bg-gray-600 text-white p-3 rounded-lg flex items-center justify-center cursor-pointer"
-          >
+          <button className="bg-gray-500 hover:bg-gray-600 text-white p-3 rounded-lg flex items-center justify-center cursor-pointer">
             <FaSearch />
           </button>
         </div>
         {/*cuatro por fila en grande y dos por fila en móvil*/}
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-3">
-          {ingredientesActuales.map((ingrediente, indice) => (
+          {ingredientesActuales.map((ingrediente) => (
             <div
-              key={indice}
+              key={ingrediente.id}
               className="border border-gray-300 rounded-lg p-3 min-w-[100px] text-center bg-gray-100 shadow-md cursor-pointer hover:scale-105 transform transition duration-300"
             >
-              {ingrediente}
+              {capitalizar(ingrediente.nombre)}
             </div>
           ))}
         </div>
@@ -92,11 +102,11 @@ const Ingredientes = () => {
         </div>
         <div className="flex flex-col items-center p-5">
           {/*crear las recetas*/}
-          <button className="bg-burnt-orange w-fit text-white px-6 py-2 rounded-md mb-4 hover:bg-mint hover:scale-105 transform transition duration-300 text-center text-2xl">Crear recetas</button>
+          <button className="bg-burnt-orange w-fit text-white px-6 py-2 rounded-md mb-4 hover:bg-mint hover:scale-105 transform transition duration-300 text-center text-2xl">
+            Crear recetas
+          </button>
         </div>
-
       </div>
-
     </>
   );
 };
