@@ -12,7 +12,7 @@ function App() {
     <>
       <Header />
       {/*Elemento común para todos los componentes*/}
-      <div className="min-h-screen inset-x-0 top-0 bg-white flex flex-col  justify-between">
+      <div className=" inset-x-0 top-0 bg-white flex flex-col  justify-between">
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Inicio />} />
@@ -21,9 +21,9 @@ function App() {
           <Route path="/nevera" element={<Nevera />} />
         </Routes>
 
-        <Footer />
         {/*Elemento común para todos los componentes*/}
       </div>
+      <Footer />
     </>
   );
 }
