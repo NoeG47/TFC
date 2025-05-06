@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ServicioIngrediente from "../ServicioLogin/ServicioIngrediente";
 import Swal from "sweetalert2";
 import { FaSearch,FaTimes } from "react-icons/fa";
-import { capitalizar, manejarPaginaAnterior, manejarPaginaSiguiente, manejarClickBusqueda, toggleSeleccion, } from "../js/funcionesIngredientes";
+import {capitalizar, manejarPaginaAnterior, manejarPaginaSiguiente, manejarClickBusqueda, SeleccionIngredientes,}from "../herramientas/funcionesIngredientes"
 
 const Ingredientes = () => {
   const [ingredientes, setIngredientes] = useState([]);
@@ -91,7 +91,7 @@ const Ingredientes = () => {
             <div
               key={ingrediente.id}
               onClick={() =>
-                toggleSeleccion(ingrediente.id, ingredientesSeleccionados, setIngredientesSeleccionados)
+                SeleccionIngredientes(ingrediente.id, ingredientesSeleccionados, setIngredientesSeleccionados)
               }
               className={`border rounded-lg p-3 min-w-[100px] text-center shadow-md cursor-pointer hover:scale-105 transform transition duration-300 ${seleccionado ? "bg-green-300" : "bg-gray-100 border-gray-300"
                 }`}

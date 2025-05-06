@@ -45,7 +45,7 @@ export const manejarClickBusqueda = (
 };
 
 // Alterna la selección de ingredientes
-export const toggleSeleccion = (
+export const SeleccionIngredientes = (
   ingredienteId,
   ingredientesSeleccionados,
   setIngredientesSeleccionados
