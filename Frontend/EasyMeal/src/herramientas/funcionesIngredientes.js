@@ -13,26 +13,19 @@ export const manejarPaginaAnterior = (paginaActual, setPaginaActual) => {
 };
 
 // Cambia de página (siguiente)
-export const manejarPaginaSiguiente = (
-  paginaActual,
-  totalPaginas,
-  setPaginaActual
-) => {
-  if (paginaActual < totalPaginas) setPaginaActual(paginaActual + 1);
+export const manejarPaginaSiguiente = (paginaActual, totalPaginas, setPaginaActual ) => {
+  if (paginaActual < totalPaginas) {
+    setPaginaActual(paginaActual + 1);
+  }
 };
 
 // Maneja la búsqueda y muestra alerta si no encuentra
-export const manejarClickBusqueda = (
-  busquedaInput,
-  setBusqueda,
-  setPaginaActual,
-  ingredientes
-) => {
+export const manejarClickBusqueda = (busquedaInput, setBusqueda, setPaginaActual, ingredientes) => {
   setBusqueda(busquedaInput);
   setPaginaActual(1);
 
   const resultados = ingredientes.filter((ingrediente) =>
-    ingrediente.nombre.toLowerCase().includes(busquedaInput.toLowerCase())
+    ingrediente.nombre.includes(busquedaInput)
   );
 
   if (busquedaInput.trim() !== "" && resultados.length === 0) {
@@ -44,15 +37,12 @@ export const manejarClickBusqueda = (
   }
 };
 
-// Alterna la selección de ingredientes
-export const SeleccionIngredientes = (
-  ingredienteId,
-  ingredientesSeleccionados,
-  setIngredientesSeleccionados
-) => {
-  setIngredientesSeleccionados((prevSeleccionados) =>
-    prevSeleccionados.includes(ingredienteId)
-      ? prevSeleccionados.filter((id) => id !== ingredienteId)
-      : [...prevSeleccionados, ingredienteId]
-  );
+export const SeleccionIngredientes = (id, seleccionados, setSeleccionados) => {
+  const yaSeleccionadoVerde = seleccionados.includes(id); 
+
+  if (yaSeleccionadoVerde) { 
+    setSeleccionados(seleccionados.filter((i) => i !== id)); //para que se quite si se vuelve a pulsar
+  } else {
+    setSeleccionados([...seleccionados, id]);//se mantenga como seleccionado
+  }
 };
