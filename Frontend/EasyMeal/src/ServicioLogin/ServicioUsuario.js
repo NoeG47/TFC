@@ -34,8 +34,9 @@ const buscarUsuarioPorCorreo = async (correo) => {
 // Actualizar nombre de usuario
 const actualizarNombre = async (id, nuevoNombre) => {
   try {
-    const response = await http.put(`/usuarios/${id}/nombre`, {
-      nombre: nuevoNombre,
+    // Cambiar la URL para que utilice el parámetro 'id_usuario' en la query
+    const response = await http.put(`/usuarios?id_usuario=${id}`, {
+      nombre: nuevoNombre, // Actualiza solo el nombre del usuario
     });
     return response.data;
   } catch (error) {
@@ -47,8 +48,9 @@ const actualizarNombre = async (id, nuevoNombre) => {
 // Actualizar contraseña de usuario
 const actualizarContrasena = async (id, nuevaContrasena) => {
   try {
-    const response = await http.put(`/usuarios/${id}/contrasena`, {
-      contrasena: nuevaContrasena,
+    // Cambiar la URL para que utilice el parámetro 'id_usuario' en la query
+    const response = await http.put(`/usuarios?id_usuario=${id}`, {
+      contrasena: nuevaContrasena, // Actualiza solo la contraseña del usuario
     });
     return response.data;
   } catch (error) {

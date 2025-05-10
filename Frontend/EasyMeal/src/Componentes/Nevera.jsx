@@ -7,7 +7,7 @@ import { capitalizar, manejarPaginaAnterior, manejarPaginaSiguiente, manejarClic
 const Ingredientes = () => {
   const [ingredientes, setIngredientes] = useState([]);
   const [busqueda, setBusqueda] = useState(""); //al hacer click al botón
-  const [busquedaInput, setBusquedaInput] = useState(""); 
+  const [busquedaInput, setBusquedaInput] = useState("");
   const [paginaActual, setPaginaActual] = useState(1);
   const [ingredientesSeleccionados, setIngredientesSeleccionados] = useState([]);
   const ingredientesPorPagina = 8;
@@ -49,7 +49,7 @@ const Ingredientes = () => {
   };
   return (
     <div className="flex flex-col p-10">
-      <div className="grid grid-cols-1 md:grid-cols-2 items-start p-10 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 items-start p-4 sm:p-6 md:p-10 gap-4 md:gap-6">
         <div>
           <h1 className="font-bold text-xl md:text-3xl my-2">Mi nevera</h1>
           <h2 className="text-xl md:text-2xl my-4">
@@ -57,12 +57,12 @@ const Ingredientes = () => {
           </h2>
         </div>
 
-        {/*ingredientes seleccionados */}
-        <div className="border rounded-lg bg-white shadow p-4 w-1/2">
+        {/* ingredientes seleccionados */}
+        <div className="border rounded-lg bg-white shadow p-4 w-full">
           {ingredientesSeleccionadosDetalles.length > 0 ? (
             <div>
               <h3 className="text-lg font-semibold mb-2">Ingredientes seleccionados:</h3>
-              <ul className="list-disc pl-5"> {/*lista de puntitos*/}
+              <ul className="list-disc pl-5 space-y-1">
                 {ingredientesSeleccionadosDetalles.map((ing) => (
                   <li key={ing.id}>{capitalizar(ing.nombre)}</li>
                 ))}
