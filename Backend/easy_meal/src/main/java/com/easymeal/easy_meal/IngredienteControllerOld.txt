@@ -1,5 +1,4 @@
 package com.easymeal.easy_meal;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,31 +10,49 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/ingredientes")
 @CrossOrigin(origins = "*") // Para permitir que el frontend pueda pedirlo
-public class IngredienteControllerOld {
+public class IngredienteController {
 
     @GetMapping
     public List<String> getIngredientes() {
         return Arrays.asList(
-            "Aceite de girasol", "Aceite de oliva", "Acelga", "Agua", "Albahaca",
-            "Alcachofa", "Alioli", "Almeja", "Anís", "Arándanos", "Arroz",
-            "Avena", "Bacalao", "Berza", "Brócoli", "Brotes de soja",
-            "Cacao en polvo", "Calabacín", "Calamar", "Canela", "Cardamomo",
-            "Carne de ternera", "Cebada", "Cebolla", "Champiñón", "Chocolate blanco",
-            "Chocolate negro", "Chocolate puro", "Cilantro", "Clavo", "Col rizada",
-            "Coles de Bruselas", "Comino", "Cordero", "Cuscús", "Cúrcuma",
-            "Endibia", "Escarola", "Espinaca", "Fideos", "Frambuesas",
-            "Gamba", "Garbanzos", "Grano de café", "Guisantes", "Harina de maíz",
-            "Harina de trigo", "Hinojo", "Huevo", "Jengibre", "Judía verde",
-            "Ketchup", "Laurel", "Lechuga", "Leche", "Lentejas",
-            "Macarrones", "Maíz", "Mantequilla", "Mayonesa", "Merluza",
-            "Miel", "Mostaza", "Nabo", "Nuez moscada", "Orégano",
-            "Pan", "Pavo", "Pepinillo", "Pepino", "Perejil",
-            "Pimiento rojo", "Pimiento verde", "Pimentón dulce", "Pimentón picante", "Plátano",
-            "Pollo", "Pulpo", "Queso", "Queso rallado", "Rábano",
-            "Ravioli", "Remolacha", "Repollo", "Romero", "Rúcula",
-            "Sal", "Salsa de soja", "Salsa de tomate", "Salmón", "Setas",
-            "Spaguetti", "Tomate", "Tomate Concentrado", "Tomate Frito", "Tomillo",
-            "Trigo", "Vinagre", "Yogur"
+            "Tomate", "Cebolla", "Ajo", "Pimiento rojo", "Pimiento verde", "Pepino",
+            "Zanahoria", "Lechuga", "Espinaca", "Brócoli", "Coliflor", "Patata",
+            "Calabacín", "Berenjena", "Champiñón", "Setas", "Puerro", "Apio",
+            "Guisantes", "Maíz", "Lentejas", "Garbanzos", "Arroz", "Quinoa",
+            "Cuscús", "Trigo", "Avena", "Pollo", "Carne de ternera", "Cerdo",
+            "Cordero", "Pavo", "Salmón", "Atún", "Gamba", "Pulpo", "Calamar",
+            "Huevo", "Leche", "Yogur", "Queso", "Mantequilla", "Crema ágria",
+            "Aceite de oliva", "Aceite de girasol", "Vinagre", "Sal", "Pimienta negra",
+            "Pimentón dulce", "Pimentón picante", "Orégano", "Albahaca", "Romero",
+            "Tomillo", "Laurel", "Canela", "Clavo", "Nuez moscada", "Jengibre",
+            "Cúrcuma", "Comino", "Cilantro", "Perejil", "Anís", "Cardamomo",
+            "Mostaza", "Miel", "Azúcar", "Chocolate puro", "Chocolate blanco",
+            "Chocolate negro", "Cacao en polvo", "Harina de trigo", "Harina de maíz",
+            "Pan", "Agua", "Salsa de soja", "Salsa de tomate", "Mayonesa", "Ketchup",
+            "Alitas de pollo", "Almejas", "Anillas de calamar", "Acelga", "Acelga", 
+            "Bacalao", "Bacalao desalado", "Bacon", "Berberechos", "Berenjena", "Boquerones",
+            "Brocoli", "Butifarra", "Caballa", "Calabacin", "Calabaza", "Calamares",
+            "Carne de cerdo", "Carne de ternera", "Carne picada", "Cebolla", "Cebollino",
+            "Cerdo", "Champiñon", "Chorizo", "Chuletas de cerdo", "Chuleton de ternera",
+            "Cilantro", "Codorniz", "Col", "Coliflor", "Comino", "Conejo", "Cordero",
+            "Costillar de cordero", "Costillas de cerdo", "Crema de leche", "Dorada",
+            "Espaguetis", "Espinacas", "Esparragos", "Fresa", "Frijoles", "Gambas",
+            "Garbanzos", "Guisantes", "Hamburguesa de pollo", "Hamburguesa de vacuno",
+            "Huevo", "Huevos camperos", "Huevos de codorniz", "Huevos ecologicos", "Higado de pollo",
+            "Higado de ternera", "Jamon", "Jamon iberico", "Jamon serrano", "Jamon york",
+            "Judia verde", "Lacon", "Langostinos", "Leche de cabra", "Leche de vaca",
+            "Leche desnatada", "Leche entera", "Lechuga", "Lentejas", "Limon", "Lomo de cerdo",
+            "Longaniza", "Lubina", "Mantequilla", "Manzana", "Maiz", "Mejillones", "Melon",
+            "Menta", "Merluza", "Merluza fresca", "Miel", "Morcilla", "Mostaza", "Muslo de pavo",
+            "Muslo de pollo", "Naranja", "Nata", "Nata para cocinar", "Nata para montar",
+            "Navajas", "Oregano", "Pan", "Patata", "Pato", "Pechuga de pollo", "Pepino",
+            "Perejil", "Pez espada", "Pierna de cordero", "Pimiento rojo", "Pimiento verde",
+            "Pollo", "Pulpo", "Queso", "Queso azul", "Queso brie", "Queso cheddar", "Queso de cabra",
+            "Queso emmental", "Queso feta", "Queso gouda", "Queso manchego", "Queso mozzarella",
+            "Queso parmesano", "Queso rallado", "Remolacha", "Romero", "Rabano", "Rucula", "Sal",
+            "Salchichas", "Salchichas frescas", "Salchichón", "Salmon", "Sardinas", "Sepia",
+            "Sobrasada", "Soja", "Solomillo de cerdo", "Solomillo de ternera", "Tomate", "Tomillo",
+            "Trucha", "Uvas", "Vainilla", "Vinagre", "Yogur", "Yogur griego", "Yogur natural", "Zanahoria"
         );
     }
 }
